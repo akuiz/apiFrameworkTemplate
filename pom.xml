@@ -8,5 +8,22 @@
     <artifactId>TestingFramework</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <feign.version>9.4.0</feign.version>
+        <feign.logger.version>9.3.1</feign.logger.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-slf4j</artifactId>
+            <version>${feign.logger.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-jackson</artifactId>
+            <version>${feign.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>
