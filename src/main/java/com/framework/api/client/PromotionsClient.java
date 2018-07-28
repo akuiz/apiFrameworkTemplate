@@ -5,7 +5,7 @@ import feign.Param;
 import feign.RequestLine;
 import feign.Response;
 
-public interface TemplatesClient {
+public interface PromotionsClient {
 
     @RequestLine("[POST] /api/templates")
     @Headers("Content-Type: application/json")
