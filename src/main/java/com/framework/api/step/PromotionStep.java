@@ -8,6 +8,6 @@ import org.springframework.stereotype.Component;
 public class PromotionStep {
 
     @Autowired
-    PromotionsClient templatesClient;
+    PromotionsClient promotionsClient;
 
 }

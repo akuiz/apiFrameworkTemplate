@@ -13,6 +13,7 @@
         <feign.logger.version>9.3.1</feign.logger.version>
         <lombok.version>1.18.0</lombok.version>
         <spring.version>5.0.7.RELEASE</spring.version>
+        <allure-testng.version>2.7.0</allure-testng.version>
     </properties>
 
     <dependencies>
@@ -35,6 +36,11 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure-testng.version}</version>
         </dependency>
     </dependencies>
 
