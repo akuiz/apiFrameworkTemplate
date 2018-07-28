@@ -1,5 +1,7 @@
 package com.framework.api.client;
 
+import com.framework.model.Id;
+import com.framework.model.Promotion;
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
@@ -9,7 +11,7 @@ public interface PromotionsClient {
 
     @RequestLine("[POST] /api/templates")
     @Headers("Content-Type: application/json")
-    Response createTemplate();
+    Id createTemplate(Promotion promotion);
 
     @RequestLine("[DELETE] /api/templates/{templateID}")
     @Headers("Content-Type: application/json")
