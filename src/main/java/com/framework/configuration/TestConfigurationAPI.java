@@ -13,4 +13,7 @@ public class TestConfigurationAPI {
     @Value("${dms.url}")
     String dmsURL;
 
+    @Value("${price_engine.url}")
+    String priceEngineURL;
+
 }
