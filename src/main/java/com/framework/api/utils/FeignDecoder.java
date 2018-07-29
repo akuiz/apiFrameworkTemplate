@@ -14,8 +14,6 @@ import java.io.Reader;
 import java.lang.reflect.Type;
 import java.util.Collections;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class FeignDecoder implements Decoder {
     private final ObjectMapper mapper;
 
@@ -47,7 +45,7 @@ public class FeignDecoder implements Decoder {
                 return null; // Eagerly returning null avoids "No content to map due to end-of-input"
             }
             reader.reset();
-            assertThat(response.status()).isEqualTo(200);
+            //assertThat(response.status()).isEqualTo(200);
             AllureUtils.saveTextLog("Response", response.toString());
             return mapper.readValue(reader, mapper.constructType(type));
         } catch (RuntimeJsonMappingException e) {
