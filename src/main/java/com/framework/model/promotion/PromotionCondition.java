@@ -1,4 +1,4 @@
-package com.framework.model;
+package com.framework.model.promotion;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

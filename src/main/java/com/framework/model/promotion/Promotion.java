@@ -1,4 +1,4 @@
-package com.framework.model;
+package com.framework.model.promotion;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.framework.model.PromotionType.promo_pct_off;
+import static com.framework.model.promotion.PromotionType.promo_pct_off;
 
 @Data
 @Builder(toBuilder = true)

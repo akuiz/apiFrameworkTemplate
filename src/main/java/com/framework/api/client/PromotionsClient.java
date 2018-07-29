@@ -1,7 +1,7 @@
 package com.framework.api.client;
 
 import com.framework.model.Id;
-import com.framework.model.Promotion;
+import com.framework.model.promotion.Promotion;
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
