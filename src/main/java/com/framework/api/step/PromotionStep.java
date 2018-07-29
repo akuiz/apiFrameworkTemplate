@@ -15,7 +15,8 @@ public class PromotionStep {
 
     @Step("Add promotion")
     public Id addPromotion(Promotion promotion){
-        return promotionsClient.createTemplate(promotion);
+        Id id = promotionsClient.createTemplate(promotion);
+        return id;
     }
 
 }
