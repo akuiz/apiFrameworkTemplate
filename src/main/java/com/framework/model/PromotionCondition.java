@@ -9,16 +9,16 @@ import java.util.Arrays;
 import java.util.List;
 
 @Data
-@Builder
+@Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 public class PromotionCondition {
     private String type = "direct";
-    private List<Integer> brands;
+    private List<Integer> brand;
 
     public static PromotionCondition adidas(){
-        return new PromotionCondition().builder()
-                .brands(Arrays.asList(1))
+        return new PromotionCondition().toBuilder()
+                .brand(Arrays.asList(1))
                 .build();
     }
 }

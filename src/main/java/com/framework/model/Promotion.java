@@ -5,10 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static com.framework.model.PromotionType.promo_pct_off;
 
 @Data
-@Builder
+@Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 public class Promotion {
@@ -16,14 +19,14 @@ public class Promotion {
     private String description;
     private double value;
     private PromotionType type;
-    private PromotionCondition condition;
+    private List<PromotionCondition> condition;
 
     public static Promotion testPromotion(){
-        return new Promotion().builder()
+        return new Promotion().toBuilder()
                 .description("TestAPIPromotion")
                 .value(0.01)
                 .type(promo_pct_off)
-                .condition(PromotionCondition.adidas())
+                .condition(Arrays.asList(PromotionCondition.adidas()))
                 .build();
     }
 
