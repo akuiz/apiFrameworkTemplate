@@ -9,15 +9,15 @@ import feign.Response;
 
 public interface PromotionsClient {
 
-    @RequestLine("[POST] /api/templates")
+    @RequestLine("POST /api/templates")
     @Headers("Content-Type: application/json")
     Id createTemplate(Promotion promotion);
 
-    @RequestLine("[DELETE] /api/templates/{templateID}")
+    @RequestLine("DELETE /api/templates/{templateID}")
     @Headers("Content-Type: application/json")
     Response deleteTemplate(@Param("templateID") String templateID);
 
-    @RequestLine("[PUT] /api/templates}")
+    @RequestLine("PUT /api/templates}")
     @Headers("Content-Type: application/json")
     Response updateTemplate();
 
