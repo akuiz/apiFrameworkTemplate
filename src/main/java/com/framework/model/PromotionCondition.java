@@ -5,14 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Promotion {
-    private String id;
-    private String description;
-    private int value;
-    private PromotionType type;
-    private PromotionCondition condition;
+public class PromotionCondition {
+    private String type = "direct";
+    private List<Integer> brands;
+
 }
