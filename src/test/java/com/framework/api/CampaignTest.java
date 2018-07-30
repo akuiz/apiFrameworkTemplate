@@ -1,5 +1,6 @@
 package com.framework.api;
 
+import com.framework.api.step.CampaignStep;
 import com.framework.api.step.PromotionStep;
 import com.framework.configuration.TestConfigurationAPI;
 import io.qameta.allure.Feature;
@@ -17,7 +18,7 @@ public class CampaignTest extends AbstractTestNGSpringContextTests{
     private PromotionStep promotionStep;
 
     @Autowired
-    private PromotionStep campaignStep;
+    private CampaignStep campaignStep;
 
     @Test(description = "Add campaign test")
     public void addCampaign(){}
