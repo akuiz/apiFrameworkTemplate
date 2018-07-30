@@ -22,4 +22,13 @@ public class Campaign {
     private String end;
     private String id;
     private List<TemplateID> discounts;
+
+    public static Campaign campaignWithPromotionIDS(String name, List<TemplateID> templateIDs){
+        return new Campaign().toBuilder()
+                .name(name)
+                .start("2018-07-01")
+                .end("2018-07-31")
+                .discounts(templateIDs)
+                .build();
+    }
 }
