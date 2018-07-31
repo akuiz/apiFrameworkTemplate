@@ -1,6 +1,7 @@
 package com.framework.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.framework.api.client.CampaignsClient;
 import com.framework.api.client.PromotionsClient;
 import com.framework.api.utils.FeignClient;
 import com.framework.api.utils.FeignDecoder;
@@ -30,6 +31,17 @@ public class TestConfigurationAPI {
     @Bean
     ObjectMapper provideMapper(){
         return new ObjectMapper().disable(FAIL_ON_UNKNOWN_PROPERTIES);
+    }
+
+    @Bean
+    CampaignsClient provideCampaignsClient(ObjectMapper mapper) {
+        return Feign.builder()
+                .logLevel(Logger.Level.FULL)
+                .logger(new Slf4jLogger(CampaignsClient.class))
+                .decoder(new FeignDecoder(mapper))
+                .encoder(new JacksonEncoder(mapper))
+                .client(new FeignClient())
+                .target(CampaignsClient.class, dmsURL);
     }
 
     @Bean
