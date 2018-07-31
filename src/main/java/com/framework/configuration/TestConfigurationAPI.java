@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
 import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
+import static com.fasterxml.jackson.databind.MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES;
 
 @Configuration
 @PropertySource("application.properties")
@@ -30,7 +31,7 @@ public class TestConfigurationAPI {
 
     @Bean
     ObjectMapper provideMapper(){
-        return new ObjectMapper().disable(FAIL_ON_UNKNOWN_PROPERTIES);
+        return new ObjectMapper().disable(FAIL_ON_UNKNOWN_PROPERTIES).enable(ACCEPT_CASE_INSENSITIVE_PROPERTIES);
     }
 
     @Bean
