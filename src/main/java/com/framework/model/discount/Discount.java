@@ -3,12 +3,10 @@ package com.framework.model.discount;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.framework.model.promotion.Promotion;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(value = { "id" })
