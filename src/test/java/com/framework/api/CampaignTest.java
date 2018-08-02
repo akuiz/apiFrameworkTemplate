@@ -6,6 +6,7 @@ import com.framework.configuration.TestConfigurationAPI;
 import com.framework.model.Id;
 import com.framework.model.campaign.Campaign;
 import com.framework.model.campaign.CreateCampaignResponse;
+import com.framework.model.campaign.EditedCampaign;
 import com.framework.model.promotion.Promotion;
 import com.framework.model.promotion.TemplateID;
 import io.qameta.allure.Feature;
@@ -35,4 +36,18 @@ public class CampaignTest extends AbstractTestNGSpringContextTests{
                 Arrays.asList(promotionTemplateID));
         CreateCampaignResponse createCampaignResponse = campaignStep.addCampaign(campaign);
     }
+
+    @Test(description = "Edit campaign test")
+    public void editCampaign(){
+        Id promotionID = promotionStep.addPromotion(Promotion.testPromotion());
+        TemplateID promotionTemplateID = new TemplateID(promotionID);
+        Campaign campaign = Campaign.campaignWithPromotionIDS("testCampaignAPI",
+                Arrays.asList(promotionTemplateID));
+        CreateCampaignResponse createCampaignResponse = campaignStep.addCampaign(campaign);
+        EditedCampaign preparedToEditCampaign = campaign.prepareCampaignToEditRequest(createCampaignResponse);
+        preparedToEditCampaign.setDates("2018-08-13","2018-08-13");
+        campaignStep.editCampaign(preparedToEditCampaign);
+    }
+
+
 }
