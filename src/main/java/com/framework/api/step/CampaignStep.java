@@ -23,7 +23,12 @@ public class CampaignStep {
 
     @Step("Edit campaign")
     public Response editCampaign(EditedCampaign campaign){
-        Response resonse = campaignsClient.updateCampaign(campaign, campaign.getId());
-        return resonse;
+        Response response = campaignsClient.updateCampaign(campaign, campaign.getId());
+        return response;
+    }
+
+    public Response deleteCampaign(String id) {
+        Response response = campaignsClient.deleteCampaign(id);
+        return response;
     }
 }
