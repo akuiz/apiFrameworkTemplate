@@ -1,6 +1,5 @@
 package com.framework.model.campaign;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.framework.model.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,8 +12,8 @@ import java.util.List;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties(value = { "id" })
-public class EditCampaign {
+public class EditedCampaign {
+    private String id;
     private String name;
     private Boolean test = true;
     private Boolean production = false;
@@ -22,7 +21,8 @@ public class EditCampaign {
     private String end;
     private List<Id> discounts;
 
-    public EditCampaign(Campaign campaign, List<Id> discountIDs){
-
+    public void setDates(String startDate, String endDate){
+        this.start = startDate;
+        this.end = endDate;
     }
 }
