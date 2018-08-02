@@ -14,9 +14,9 @@ public interface CampaignsClient {
     @Headers("Content-Type: application/json")
     CreateCampaignResponse addCampaign(Campaign campaign);
 
-    @RequestLine("DELETE /api/campaigns")
+    @RequestLine("DELETE /api/campaigns/{campaignID}")
     @Headers("Content-Type: application/json")
-    Response deleteCampaign();
+    Response deleteCampaign(@Param("campaignID") String campaignID);
 
     @RequestLine("POST /api/campaigns/{campaignID}")
     @Headers("Content-Type: application/json")
