@@ -2,6 +2,7 @@ package com.framework.api.client;
 
 import com.framework.model.campaign.Campaign;
 import com.framework.model.campaign.CreateCampaignResponse;
+import com.framework.model.campaign.EditedCampaign;
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
@@ -19,6 +20,6 @@ public interface CampaignsClient {
 
     @RequestLine("POST /api/campaigns/{campaignID}")
     @Headers("Content-Type: application/json")
-    Response updateCampaign(@Param("campaignID") String campaignID);
+    Response updateCampaign(EditedCampaign campaign, @Param("campaignID") String campaignID);
 
 }
