@@ -2,8 +2,8 @@ package com.framework.api;
 
 import com.framework.api.step.PromotionStep;
 import com.framework.configuration.TestConfigurationAPI;
-import com.framework.model.Id;
-import com.framework.model.promotion.Promotion;
+import com.framework.api.model.other.Id;
+import com.framework.api.model.promotion.Promotion;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.springframework.beans.factory.annotation.Autowired;

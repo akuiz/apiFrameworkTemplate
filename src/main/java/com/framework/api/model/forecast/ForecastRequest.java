@@ -1,4 +1,4 @@
-package com.framework.model.forecast;
+package com.framework.api.model.forecast;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

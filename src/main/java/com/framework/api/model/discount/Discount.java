@@ -1,7 +1,7 @@
-package com.framework.model.discount;
+package com.framework.api.model.discount;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.framework.model.promotion.Promotion;
+import com.framework.api.model.promotion.Promotion;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

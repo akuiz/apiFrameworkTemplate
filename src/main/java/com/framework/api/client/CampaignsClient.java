@@ -1,8 +1,8 @@
 package com.framework.api.client;
 
-import com.framework.model.campaign.Campaign;
-import com.framework.model.campaign.CreateCampaignResponse;
-import com.framework.model.campaign.EditedCampaign;
+import com.framework.api.model.campaign.Campaign;
+import com.framework.api.model.campaign.CreateCampaignResponse;
+import com.framework.api.model.campaign.EditedCampaign;
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;

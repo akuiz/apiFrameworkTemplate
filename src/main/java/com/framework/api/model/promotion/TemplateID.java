@@ -1,6 +1,6 @@
-package com.framework.model.promotion;
+package com.framework.api.model.promotion;
 
-import com.framework.model.Id;
+import com.framework.api.model.other.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

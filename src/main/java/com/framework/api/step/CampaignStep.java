@@ -1,9 +1,9 @@
 package com.framework.api.step;
 
 import com.framework.api.client.CampaignsClient;
-import com.framework.model.campaign.Campaign;
-import com.framework.model.campaign.CreateCampaignResponse;
-import com.framework.model.campaign.EditedCampaign;
+import com.framework.api.model.campaign.Campaign;
+import com.framework.api.model.campaign.CreateCampaignResponse;
+import com.framework.api.model.campaign.EditedCampaign;
 import feign.Response;
 import io.qameta.allure.Step;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +30,9 @@ public class CampaignStep {
     public Response deleteCampaign(String id) {
         Response response = campaignsClient.deleteCampaign(id);
         return response;
+    }
+
+    public void changeCampaignsDates(EditedCampaign editedCampaign, String startDate, String endDate) {
+
     }
 }

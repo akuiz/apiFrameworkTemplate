@@ -1,8 +1,8 @@
-package com.framework.model.campaign;
+package com.framework.api.model.campaign;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.framework.model.Id;
-import com.framework.model.promotion.TemplateID;
+import com.framework.api.model.other.Id;
+import com.framework.api.model.promotion.TemplateID;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -44,4 +44,5 @@ public class Campaign {
                 .end(end)
                 .build();
     }
+
 }

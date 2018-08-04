@@ -1,4 +1,4 @@
-package com.framework.model.promotion;
+package com.framework.api.model.promotion;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +18,19 @@ public class PromotionCondition {
 
     public static PromotionCondition adidas(){
         return new PromotionCondition().toBuilder()
-                .brand(Arrays.asList(1))
+                .brand(Arrays.asList(211))
+                .build();
+    }
+
+    public static PromotionCondition calvinKlein(){
+        return new PromotionCondition().toBuilder()
+                .brand(Arrays.asList(28))
+                .build();
+    }
+
+    public static PromotionCondition freePeople(){
+        return new PromotionCondition().toBuilder()
+                .brand(Arrays.asList(60))
                 .build();
     }
 }
