@@ -29,9 +29,15 @@
         <allure-testng.version>2.7.0</allure-testng.version>
         <jackson.version>2.8.8</jackson.version>
         <assertj.version>3.9.1</assertj.version>
+        <selenide.version>4.12.3</selenide.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>${selenide.version}</version>
+        </dependency>
         <dependency>
             <groupId>io.github.openfeign</groupId>
             <artifactId>feign-slf4j</artifactId>
