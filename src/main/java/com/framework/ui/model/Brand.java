@@ -1,13 +1,13 @@
 package com.framework.ui.model;
 
-public enum Brands {
+public enum Brand {
     Adidas("adidas"),
     Free_People("Free people"),
     Calvin_Klein("Calvin Klein");
 
     private String displayName;
 
-    Brands(String displayName) {
+    Brand(String displayName) {
         this.displayName = displayName;
     }
 
