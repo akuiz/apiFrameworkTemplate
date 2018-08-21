@@ -1,6 +1,8 @@
 package com.framework.ui;
 
 import com.codeborne.selenide.SelenideElement;
+import com.framework.ui.campaign.CampaignsPage;
+import com.framework.ui.predictive.CampaignsComponent;
 import com.framework.ui.promotion.PromotionsPage;
 
 import static com.codeborne.selenide.Selenide.$;
@@ -21,4 +23,18 @@ public class Navigation extends PageObject{
         return new PromotionsPage();
     }
 
+    public CampaignsPage navigateToCampaignsPage(){
+        campaignsLink.click();
+        return new CampaignsPage();
+    }
+
+    public CampaignsComponent navigateToOptimizePage() {
+        optimizeLink.click();
+        return new CampaignsComponent();
+    }
+
+    public CampaignsComponent navigateToForecastPage() {
+        forecastLink.click();
+        return new CampaignsComponent();
+    }
 }

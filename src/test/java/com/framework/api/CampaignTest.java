@@ -59,5 +59,8 @@ public class CampaignTest extends AbstractTestNGSpringContextTests{
         campaignStep.deleteCampaign(createCampaignResponse.getId().getId());
     }
 
+    public void prepareOptimizeCampaigns(){
+
+    }
 
 }

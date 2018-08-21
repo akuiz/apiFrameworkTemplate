@@ -33,4 +33,10 @@ public class PromotionCondition {
                 .brand(Arrays.asList(60))
                 .build();
     }
+
+    public static PromotionCondition vans() {
+        return new PromotionCondition().toBuilder()
+                .brand(Arrays.asList(195))
+                .build();
+    }
 }

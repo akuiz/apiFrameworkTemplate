@@ -29,8 +29,17 @@ public class Campaign {
     public static Campaign campaignWithPromotionIDS(String name, List<TemplateID> templateIDs){
         return new Campaign().toBuilder()
                 .name(name)
-                .start("2018-07-01")
-                .end("2018-07-31")
+                .start("2018-09-01")
+                .end("2018-09-30")
+                .discounts(templateIDs)
+                .build();
+    }
+
+    public static Campaign campaignWithPromotionIDS(String name, String startDate, String endDate, List<TemplateID> templateIDs){
+        return new Campaign().toBuilder()
+                .name(name)
+                .start(startDate)
+                .end(endDate)
                 .discounts(templateIDs)
                 .build();
     }

@@ -49,14 +49,7 @@ public class Promotion {
                 .build();
     }
 
-    public static Promotion adidas10OFF(){
-        return new Promotion().toBuilder()
-                .description("adidas 10% OFF")
-                .value(0.1)
-                .type(promo_pct_off)
-                .condition(Arrays.asList(PromotionCondition.adidas()))
-                .build();
-    }
+
 
     public static Promotion adidasBOGO(){
         return new Promotion().toBuilder()
@@ -85,6 +78,53 @@ public class Promotion {
                 .build();
     }
 
+    public static List<Promotion> optimizeTestPromotions(){
+        return Arrays.asList(freePeopleBOGO());
+    }
+
+    public static Promotion ck10OFF(){
+        return new Promotion().toBuilder()
+                .description("at_CK 10 OFF")
+                .value(0.1)
+                .type(promo_pct_off)
+                .condition(Arrays.asList(PromotionCondition.calvinKlein()))
+                .build();
+    }
 
 
+    public static Promotion ckBOGO() {
+        return new Promotion().toBuilder()
+                .description("at_CK BOGO")
+                .value(0.01)
+                .type(promo_bg)
+                .condition(Arrays.asList(PromotionCondition.calvinKlein()))
+                .build();
+    }
+
+    public static Promotion adidas10OFF(){
+        return new Promotion().toBuilder()
+                .description("at_adidas 10 OFF")
+                .value(0.1)
+                .type(promo_pct_off)
+                .condition(Arrays.asList(PromotionCondition.adidas()))
+                .build();
+    }
+
+    public static Promotion vans10OFF() {
+        return new Promotion().toBuilder()
+                .description("at_Vans 10 OFF")
+                .value(0.1)
+                .type(promo_pct_off)
+                .condition(Arrays.asList(PromotionCondition.vans()))
+                .build();
+    }
+
+    public static Promotion ck20OFF() {
+        return new Promotion().toBuilder()
+                .description("at_CK 20 OFF")
+                .value(0.2)
+                .type(promo_pct_off)
+                .condition(Arrays.asList(PromotionCondition.calvinKlein()))
+                .build();
+    }
 }
