@@ -1,6 +1,5 @@
 package com.framework.api.model.campaign;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.framework.api.model.other.Id;
 import com.framework.api.model.promotion.TemplateID;
 import lombok.AllArgsConstructor;
@@ -16,11 +15,11 @@ import static com.framework.api.utils.CodeUtils.convertList;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIgnoreProperties(value = { "id" })
 public class Campaign {
     private String name;
     private Boolean test = true;
     private Boolean production = false;
+    private Boolean deleted;
     private String start;
     private String end;
     private String id;

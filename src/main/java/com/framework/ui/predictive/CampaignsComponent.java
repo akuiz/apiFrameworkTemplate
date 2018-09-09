@@ -5,6 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 import com.framework.ui.DatePicker;
 import com.framework.ui.TabPage;
 import com.framework.ui.constants.Dates;
+import com.framework.ui.constants.Period;
 import com.framework.ui.model.campaign.Campaign;
 import com.framework.ui.model.prediction.ForecastModel;
 import com.framework.ui.model.prediction.Prediction;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CampaignsComponent extends TabPage implements Dates {
 
@@ -26,7 +28,9 @@ public class CampaignsComponent extends TabPage implements Dates {
     private ElementsCollection toggles = root.$$(".mat-slide-toggle-thumb");
     private ElementsCollection activeToggles = root.$$(".mat-checked");
 
-    private ElementsCollection optimizedCampaigns = root.$$(".optimized");
+    private ElementsCollection optimizedCampaigns = root.$(".optimized").$$(".table__row");
+
+    private SelenideElement noCampaignsSign = root.$(".no-data-message");
 
     private SelenideElement optimizeButton = root.$("button");
     private SelenideElement forecastButton = root.$(".btn__title");
@@ -68,7 +72,7 @@ public class CampaignsComponent extends TabPage implements Dates {
     public ForecastModel forecast() {
         forecastButton.click();
         Prediction predictionValues = new ChartComponent().waitForForecast().getPredictionValues();
-        return new ForecastModel(predictionValues, getToggledCampaigns(),getDates());
+        return new ForecastModel(predictionValues, getToggledCampaigns(), getDates());
     }
 
     private List<Campaign> getToggledCampaigns() {
@@ -81,7 +85,7 @@ public class CampaignsComponent extends TabPage implements Dates {
     }
 
     public void waitForOptimize() {
-        loader.waitUntil(not(visible), optimizeTimeout);
+        new OptimizeProgress().waitForOptimizeFinish();
     }
 
     public void checkElementsDisabled() {
@@ -102,8 +106,15 @@ public class CampaignsComponent extends TabPage implements Dates {
     }
 
     public ForecastModel optimize(ForecastModel forecastModel) {
-        setEndDate(forecastModel.getEndDate());
-        setStartDate(forecastModel.getStartDate());
+        DateTime currentStartDate = dtf.parseDateTime(startDateInput.getValue());
+        if(forecastModel.getStartDate().isBefore(currentStartDate)){
+            setStartDate(forecastModel.getStartDate());
+            setEndDate(forecastModel.getEndDate());
+        }
+        else {
+            setEndDate(forecastModel.getEndDate());
+            setStartDate(forecastModel.getStartDate());
+        }
         optimizeButton.click();
         new OptimizeProgress().checkOptimizeProgressHasBeenStarted();
         waitForOptimize();
@@ -127,7 +138,7 @@ public class CampaignsComponent extends TabPage implements Dates {
             String permutation = Integer.toBinaryString(i);
             String finalPermutation = StringUtils.repeat("0", amountOfCampaigns - permutation.length()) + permutation;
             ForecastModel forecastModel = buildForecastBasedOnPermutations(finalPermutation);
-            if(forecastModel.profitMoreThan(bestPrediction.getProfit().getValue())){
+            if (forecastModel.profitMoreThan(bestPrediction.getProfit().getValue())) {
                 bestForecast = forecastModel;
                 bestPrediction = bestForecast.getPredictionValues();
             }
@@ -136,8 +147,7 @@ public class CampaignsComponent extends TabPage implements Dates {
     }
 
     private ForecastModel buildForecastBasedOnPermutations(String permutation) {
-        System.out.println(permutation);
-        for (int i = 0; i <permutation.length(); i++) {
+        for (int i = 0; i < permutation.length(); i++) {
             CampaignElementToggle campaignElement = new CampaignElementToggle(toggles.get(i).parent().parent().parent());
             if (permutation.charAt(i) == '0') {
                 campaignElement.setDisabled();
@@ -152,5 +162,104 @@ public class CampaignsComponent extends TabPage implements Dates {
         setEndDate(forecastModel.getEndDate());
         setStartDate(forecastModel.getStartDate());
         return this;
+    }
+
+    public CampaignsComponent optimizeDisabled() {
+        optimizeButton.shouldBe(disabled);
+        return this;
+    }
+
+    public CampaignsComponent declineLongOptimize() {
+        optimizeButton.click();
+        new OptimizeDialog().decline();
+        return this;
+    }
+
+    public CampaignsComponent checkOptimizeProgressNotStarted() {
+        new ChartComponent().checkOptimizeProcessHasNotBeenStarted();
+        return this;
+    }
+
+    public ForecastModel longOptimize(ForecastModel forecastModel) {
+        setEndDate(forecastModel.getEndDate());
+        setStartDate(forecastModel.getStartDate());
+        optimizeButton.click();
+        new OptimizeDialog().accept();
+        new OptimizeProgress().checkOptimizeProgressHasBeenStarted();
+        //waitForOptimize();
+        //ChartComponent cc = new ChartComponent();
+        //Prediction predictionValues = cc.getPredictionValues();
+        //return new ForecastModel(predictionValues, getPickedCampaigns(), getDates());
+        return null;
+    }
+
+    public ForecastModel forecast(ForecastModel forecastModel) {
+        setEndDate(forecastModel.getEndDate());
+        setStartDate(forecastModel.getStartDate());
+        setCampaignsForForecast(forecastModel.getCampaigns());
+        return forecast();
+    }
+
+    private CampaignsComponent setCampaignsForForecast(List<Campaign> campaigns) {
+        for (Campaign campaign : campaigns) {
+            new CampaignElementToggle(campaign.getName()).toggleCampaign();
+        }
+        return this;
+    }
+
+    public ForecastModel getForecast() {
+        Prediction predictionValues = new ChartComponent().getPredictionValues();
+        return new ForecastModel(predictionValues, getToggledCampaigns(), getDates());
+    }
+
+    public CampaignsComponent setDates(Period period) {
+        setEndDate(period.getEndDate());
+        setStartDate(period.getStartDate());
+        return this;
+    }
+
+    public void checkDatePicker() {
+        startDateInput.click();
+        DatePicker dp = new DatePicker();
+        dp.checkNextMonthButtonDisabled();
+        dp.setDay(2);
+        endDateInput.click();
+        dp = new DatePicker();
+        dp.checkPreviousMonthButtonDisabled();
+        dp.cantPickDay(1);
+        dp.setDay(29);
+        startDateInput.click();
+        dp = new DatePicker();
+        dp.cantPickDay(30);
+    }
+
+    public void checkNoCampaignsFound() {
+        noCampaignsSign.shouldBe(visible).has(text("No campaigns found"));
+    }
+
+    public Integer startOptmize(ForecastModel forecastModel) {
+        setDates(forecastModel);
+        optimizeButton.click();
+        OptimizeProgress progress = new OptimizeProgress();
+        progress.checkOptimizeProgressHasBeenStarted().waitForFirstProgress();
+        return progress.getPercentage();
+    }
+
+    public Integer getPercentage() {
+        return new OptimizeProgress().getPercentage();
+    }
+
+    public void checkOptimizeProgress(Integer percentage) {
+        OptimizeProgress progress = new OptimizeProgress();
+        progress.checkOptimizeProgressHasBeenStarted();
+        assertThat(progress.getPercentage()).isEqualTo(percentage);
+    }
+
+    public void startForecast(ForecastModel forecastModel) {
+        setEndDate(forecastModel.getEndDate());
+        setStartDate(forecastModel.getStartDate());
+        setCampaignsForForecast(forecastModel.getCampaigns());
+        forecastButton.click();
+
     }
 }

@@ -48,12 +48,12 @@ public class CampaignWindow extends PageObject implements Dates {
         return this;
     }
 
-    private CampaignWindow setStartDate(DateTime startDate) {
+    protected CampaignWindow setStartDate(DateTime startDate) {
         clickStartDateInput().setDate(startDate);
         return this;
     }
 
-    private CampaignWindow setEndDate(DateTime endDate) {
+    protected CampaignWindow setEndDate(DateTime endDate) {
         clickEndDateInput().setDate(endDate);
         return this;
     }
@@ -64,7 +64,7 @@ public class CampaignWindow extends PageObject implements Dates {
     }
 
     private DatePicker clickEndDateInput(){
-        startDateInput.click();
+        endDateInput.click();
         return new DatePicker();
     }
 

@@ -4,6 +4,8 @@ import com.codeborne.selenide.SelenideElement;
 import com.framework.ui.constants.Dates;
 import org.joda.time.DateTime;
 
+import static com.codeborne.selenide.Condition.attribute;
+import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -19,7 +21,6 @@ public class DatePicker extends PageObject implements Dates {
 
     public DatePicker() {
         super($("mat-datepicker-content"));
-        System.out.println(pickedDate.getText());
         date = datePickerFormatter.parseDateTime(pickedDate.getAttribute("aria-label"));
     }
 
@@ -29,7 +30,7 @@ public class DatePicker extends PageObject implements Dates {
                 .setDay(date.getDayOfMonth());
     }
 
-    private DatePicker setDay(int dayToSet) {
+    public DatePicker setDay(int dayToSet) {
         $(byText(String.valueOf(dayToSet))).click();
         return this;
     }
@@ -62,5 +63,18 @@ public class DatePicker extends PageObject implements Dates {
             }
         }
         return this;
+    }
+
+    public void checkNextMonthButtonDisabled() {
+        nextMonthButton.shouldBe(disabled);
+    }
+
+
+    public void checkPreviousMonthButtonDisabled() {
+        previousMonthButton.shouldBe(disabled);
+    }
+
+    public void cantPickDay(int day) {
+        root.$(byText(String.valueOf(day))).parent().shouldHave(attribute("aria-disabled", "true"));
     }
 }

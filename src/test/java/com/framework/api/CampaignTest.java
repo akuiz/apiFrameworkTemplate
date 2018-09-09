@@ -49,18 +49,4 @@ public class CampaignTest extends AbstractTestNGSpringContextTests{
         campaignStep.editCampaign(preparedToEditCampaign);
     }
 
-    @Test(description = "Delete campaign test")
-    public void deleteCampaign(){
-        Id promotionID = promotionStep.addPromotion(Promotion.testPromotion());
-        TemplateID promotionTemplateID = new TemplateID(promotionID);
-        Campaign campaign = Campaign.campaignWithPromotionIDS("deleteCampaignAPI",
-                Arrays.asList(promotionTemplateID));
-        CreateCampaignResponse createCampaignResponse = campaignStep.addCampaign(campaign);
-        campaignStep.deleteCampaign(createCampaignResponse.getId().getId());
-    }
-
-    public void prepareOptimizeCampaigns(){
-
-    }
-
 }

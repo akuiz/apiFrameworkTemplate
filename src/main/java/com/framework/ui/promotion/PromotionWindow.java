@@ -2,7 +2,7 @@ package com.framework.ui.promotion;
 
 import com.codeborne.selenide.SelenideElement;
 import com.framework.ui.PageObject;
-import com.framework.ui.model.Brand;
+import com.framework.ui.model.promotion.Brand;
 import com.framework.ui.model.promotion.Promotion;
 import com.framework.ui.model.promotion.PromotionType;
 import com.framework.ui.selector.CheckBoxSelector;
@@ -10,6 +10,7 @@ import com.framework.ui.selector.PromotionTypeSelector;
 
 import java.util.List;
 
+import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Selenide.$;
 import static com.framework.ui.model.promotion.PromotionType.BOGO;
 import static com.framework.ui.model.promotion.PromotionType.OFF;
@@ -21,7 +22,7 @@ public class PromotionWindow extends PageObject {
     protected SelenideElement brandSelector = root.$(".rule__input");
     protected SelenideElement typeSelector = root.$(".type__input");
     protected SelenideElement value = root.$(".value__input");
-    protected SelenideElement confirmAction = root.$(".btn__title");
+    protected SelenideElement confirmAction = root.$(".btn");
 
     public PromotionWindow() {
         super($("app-dialog-add-edit-promo"));
@@ -56,9 +57,10 @@ public class PromotionWindow extends PageObject {
         return new PromotionsPage();
     }
 
+
     protected PromotionWindow setValue(Double value) {
         if (!getPromotionType().equals(BOGO)) {
-            this.value.setValue(value.toString());
+            this.value.setValue(String.valueOf((int) (100 * value)));
         }
         return this;
     }
@@ -83,4 +85,7 @@ public class PromotionWindow extends PageObject {
         } else return OFF;
     }
 
+    public void confirmButtonShouldBeDisabled() {
+        confirmAction.shouldBe(disabled);
+    }
 }

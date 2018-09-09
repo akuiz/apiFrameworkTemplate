@@ -16,7 +16,7 @@ public class CampaignElementToggle extends CampaignElement{
     private SelenideElement toggle = root.$(".mat-slide-toggle-bar");
 
     private SelenideElement name = root.$(".name-column__title");
-    private ElementsCollection discounts = root.$$(".ng-star-inserted");
+    private ElementsCollection discounts = root.$(".name-column__promos").$$(".ng-star-inserted");
 
     public CampaignElementToggle(SelenideElement root) {
         super(root);

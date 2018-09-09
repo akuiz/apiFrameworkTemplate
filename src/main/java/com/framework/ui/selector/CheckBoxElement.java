@@ -19,4 +19,12 @@ public class CheckBoxElement extends PageObject{
            checkBox.click();
         }
     }
+
+    void click(){
+           checkBox.click();
+    }
+
+    public boolean isEnabled() {
+        return checkBox.has(cssClass("mat-pseudo-checkbox-checked"));
+    }
 }

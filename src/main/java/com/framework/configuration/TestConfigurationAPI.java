@@ -11,7 +11,6 @@ import feign.Feign;
 import feign.Logger;
 import feign.jackson.JacksonEncoder;
 import feign.slf4j.Slf4jLogger;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -24,12 +23,6 @@ import static com.fasterxml.jackson.databind.MapperFeature.ACCEPT_CASE_INSENSITI
 @PropertySource("application.properties")
 @ComponentScan(value = "com.framework.api.step")
 public class TestConfigurationAPI {
-
-    @Value("${dev.url}")
-    String devURL;
-
-    @Value("${dev.dms.url}")
-    String devDmsURL;
 
     @Bean
     ObjectMapper provideMapper(){
@@ -44,7 +37,7 @@ public class TestConfigurationAPI {
                 .decoder(new FeignDecoder(mapper))
                 .encoder(new JacksonEncoder(mapper))
                 .client(new FeignClient())
-                .target(CampaignsClient.class, devURL);
+                .target(CampaignsClient.class, EnvironmentConfiguration.INSTANCE.getEnvironmentConfig().url());
     }
 
     @Bean
@@ -55,7 +48,7 @@ public class TestConfigurationAPI {
                 .decoder(new FeignDecoder(mapper))
                 .encoder(new JacksonEncoder(mapper))
                 .client(new FeignClient())
-                .target(PromotionsClient.class, devURL);
+                .target(PromotionsClient.class, EnvironmentConfiguration.INSTANCE.getEnvironmentConfig().url());
     }
 
     @Bean
@@ -66,7 +59,7 @@ public class TestConfigurationAPI {
                 .decoder(new FeignDecoder(mapper))
                 .encoder(new JacksonEncoder(mapper))
                 .client(new FeignClient())
-                .target(ForecastClient.class, devURL);
+                .target(ForecastClient.class, EnvironmentConfiguration.INSTANCE.getEnvironmentConfig().url());
     }
 
     @Bean
@@ -77,7 +70,7 @@ public class TestConfigurationAPI {
                 .decoder(new FeignDecoder(mapper))
                 .encoder(new JacksonEncoder(mapper))
                 .client(new FeignClient())
-                .target(DMSClient.class, devDmsURL);
+                .target(DMSClient.class, EnvironmentConfiguration.INSTANCE.getEnvironmentConfig().url());
     }
 
 }

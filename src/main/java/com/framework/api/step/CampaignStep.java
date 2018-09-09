@@ -9,6 +9,8 @@ import io.qameta.allure.Step;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class CampaignStep {
 
@@ -27,12 +29,17 @@ public class CampaignStep {
         return response;
     }
 
-    public Response deleteCampaign(String id) {
-        Response response = campaignsClient.deleteCampaign(id);
+    public Response deleteCampaign(Campaign campaign) {
+        System.out.println(campaign.getId());
+        Response response = campaignsClient.deleteCampaign(campaign.getId());
         return response;
     }
 
     public void changeCampaignsDates(EditedCampaign editedCampaign, String startDate, String endDate) {
 
+    }
+
+    public List<Campaign> getCampaigns() {
+        return campaignsClient.getCampaigns(200);
     }
 }

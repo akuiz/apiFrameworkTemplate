@@ -1,6 +1,5 @@
 package com.framework.ui;
 
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.framework.ui.promotion.PromotionsPage;
 
@@ -16,7 +15,6 @@ public class RemoveWindow extends PageObject{
 
     public PromotionsPage confirmRemove(){
         $(byText("REMOVE")).click();
-        Selenide.sleep(2000);
         return new PromotionsPage();
     }
 }

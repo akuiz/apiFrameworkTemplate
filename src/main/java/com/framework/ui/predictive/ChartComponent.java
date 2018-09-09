@@ -60,4 +60,9 @@ public class ChartComponent extends PageObject {
         downloadSpinner.waitUntil(not(visible), 30000);
         return this;
     }
+
+    public ChartComponent checkOptimizeProcessHasNotBeenStarted() {
+        $(".optimize-forecast__progress").shouldBe(not(visible));
+        return this;
+    }
 }

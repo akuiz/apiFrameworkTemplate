@@ -7,6 +7,8 @@ import feign.Param;
 import feign.RequestLine;
 import feign.Response;
 
+import java.util.List;
+
 public interface PromotionsClient {
 
     @RequestLine("POST /api/templates")
@@ -20,5 +22,9 @@ public interface PromotionsClient {
     @RequestLine("PUT /api/templates}")
     @Headers("Content-Type: application/json")
     Response updateTemplate();
+
+    @RequestLine("GET /api/templates?limit={limit}")
+    @Headers("Content-Type: application/json")
+    List<Promotion> getPromotions(@Param("limit") int limit);
 
 }

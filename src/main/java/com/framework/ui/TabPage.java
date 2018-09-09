@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Condition.visible;
 public class TabPage extends PageObject{
 
     protected SelenideElement loader = root.$(".mat-progress-spinner");
-    private long downloadTimeout = 5000;
+    private long downloadTimeout = 6000;
 
     public TabPage(SelenideElement root) {
         super(root);

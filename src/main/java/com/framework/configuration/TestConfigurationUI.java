@@ -13,13 +13,10 @@ public class TestConfigurationUI {
     @Value("${browser}")
     public String browser;
 
-    @Value("${dev.url}")
-    public String url;
 
     @PostConstruct
     public void setProperties() {
         com.codeborne.selenide.Configuration.browser = browser;
-        com.codeborne.selenide.Configuration.baseUrl = url;
     }
 
 }

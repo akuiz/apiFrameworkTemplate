@@ -8,6 +8,8 @@ import feign.Param;
 import feign.RequestLine;
 import feign.Response;
 
+import java.util.List;
+
 public interface CampaignsClient {
 
     @RequestLine("POST /api/campaigns")
@@ -22,4 +24,7 @@ public interface CampaignsClient {
     @Headers("Content-Type: application/json")
     Response updateCampaign(EditedCampaign campaign, @Param("campaignID") String campaignID);
 
+    @RequestLine("GET /api/campaigns?limit={limit}")
+    @Headers("Content-Type: application/json")
+    List<Campaign> getCampaigns(@Param("limit") int limit);
 }
